@@ -8,3 +8,10 @@ wheels/
 
 # Virtual environments
 .venv
+*.log
+.idea/
+.venv/
+.pytest_cache/
+# Ignore dynaconf secret files
+.secrets.*
+bundle/

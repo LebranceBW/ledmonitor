@@ -1,0 +1,11 @@
+interval = 1
+timeout = 30
+
+[bluetooth]
+device_address = "a4:c1:38:1b:1b:27"
+service_uuid = "00001f10-0000-1000-8000-00805f9b34fb"
+characteristic_uuid = "00001f1f-0000-1000-8000-00805f9b34fb"
+
+[sensors]
+cpu_temp_sensor_id = "/amdcpu/0/temperature/2"
+gpu_temp_sensor_id = "/gpu-nvidia/0/temperature/0"
