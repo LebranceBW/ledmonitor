@@ -1,13 +1,29 @@
 [project]
 name = "ledmonitor"
 version = "0.1.0"
-description = "Add your description here"
+description = "A temperature monitoring and LED display control system"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "argparse>=1.4.0",
     "bleak>=1.1.0",
+    "dynaconf>=3.2.0",
     "hardwaremonitor>=1.0.0",
     "pydantic>=2.11.7",
+    "pyinstaller>=6.15.0",
     "pywin32>=311",
+    "toml>=0.10.2",
 ]
+
+[tool.briefcase]
+bundle = "com.example"
+project_name = "ledmonitor"
+
+[tool.briefcase.app]
+formal_name = "Hello World"
+description = "A Tutorial app"
+long_description = """More details about the app should go here.
+"""
+sources = ["./*.py"]
+requires = []
+license = "MIT"

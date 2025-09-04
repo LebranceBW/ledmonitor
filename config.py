@@ -1,20 +1,27 @@
-# Configuration file for LED Monitor
+import os
+import sys
+from dynaconf import Dynaconf
+from logger_config import logger
 
-# Bluetooth device configuration
-DEVICE_ADDRESS = "a4:c1:38:1b:1b:27"
-SERVICE_UUID = "00001f10-0000-1000-8000-00805f9b34fb"
-CHARACTERISTIC_UUID = "00001f1f-0000-1000-8000-00805f9b34fb"
+# Determine root_path based on platform and environment
+if sys.platform == "win32":
+    # On Windows, use APPDATA directory
+    root_path = os.path.join(os.environ.get("APPDATA", ""), "ledmonitor")
+else:
+    # On other platforms, use home directory
+    root_path = os.path.join(os.path.expanduser("~"), ".ledmonitor")
 
-# Sensor IDs
-CPU_TEMP_SENSOR_ID = "/amdcpu/0/temperature/2"  # Core (Tctl/Tdie)
-GPU_TEMP_SENSOR_ID = "/gpu-nvidia/0/temperature/0"  # GPU Core
+# Check if config file exists in root_path, otherwise use current directory
+config_file_path = os.path.join(root_path, "config.toml")
+if not os.path.exists(root_path):
+    root_path = "./config"
 
-# Default display configuration
-DEFAULT_DISPLAY_CONFIG = {
-    "smiley": 1,      # (^_^)
-    "battery": False,
-    "percent": False,
-    "tmpsmb": 4,      # _
-    "vtimed": 5000,
-    "hwver_id": 10
-}
+logger.info(f"Using config file: {config_file_path}, {root_path}")
+settings = Dynaconf(
+    root_path=root_path,
+    envvar_prefix="DYNACONF",
+    settings_files=["config.toml"],
+)
+
+# `envvar_prefix` = export envvars with `export DYNACONF_FOO=bar`.
+# `settings_files` = Load these files in the order.
